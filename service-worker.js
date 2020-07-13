@@ -1,5 +1,5 @@
 const CACHE_NAME = "firstpwa";
-var urlsToCache = [
+let urlsToCache = [
   "/",
   "/nav.html",
   "/index.html",
@@ -8,12 +8,12 @@ var urlsToCache = [
   "/pages/contact.html",
   "/css/materialize.min.css",
   "/js/materialize.min.js",
-  "/js/nav.js"
+  "/js/script.js",
 ];
- 
-self.addEventListener("install", function(event) {
+
+self.addEventListener("install", function (event) {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
+    caches.open(CACHE_NAME).then(function (cache) {
       return cache.addAll(urlsToCache);
     })
   );
