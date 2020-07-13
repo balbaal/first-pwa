@@ -1,4 +1,4 @@
-const CACHE_NAME = "firstpwa";
+const CACHE_NAME = "firstpwa-v5";
 let urlsToCache = [
   "/",
   "/nav.html",
@@ -37,5 +37,21 @@ self.addEventListener("fetch", function (event) {
         );
         return fetch(event.request);
       })
+  );
+});
+
+// remove old cache
+self.addEventListener("activate", function (event) {
+  event.waitUntil(
+    caches.keys().then(function (cacheNames) {
+      return Promise.all(
+        cacheNames.map(function (cacheName) {
+          if (cacheName != CACHE_NAME) {
+            console.log("ServiceWorker: cache " + cacheName + " dihapus");
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
   );
 });
